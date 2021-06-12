@@ -11,12 +11,8 @@
 try
 {
 
-	$pro_name = $_POST['name'];
-	$pro_pass = $_POST['pass'];
-	$pro_gazou_name = $_POST['gazou_name'];
-
-	$pro_name = htmlspecialchars($pro_name, ENT_QUOTES, 'UTF-8');
-  $pro_pass = htmlspecialchars($pro_pass, ENT_QUOTES, 'UTF-8');
+  $pro_code = $_POST['code'];
+  $pro_gazou_name=$_POST['gazou_name'];
 
 	$dsn = 'mysql:dbname=shop;host=localhost;charset=utf8';
 	$user = 'root';
@@ -24,17 +20,17 @@ try
 	$dbh = new PDO($dsn, $user, $password);
 	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 	
-	$sql = 'INSERT INTO mst_product(name,price,gazou) VALUES (?,?,?)';
+	$sql = 'DELETE FROM mst_product WHERE code=?';
 	$stmt = $dbh->prepare($sql);
-	$data[] = $pro_name;
-	$data[] = $pro_price;
-	$data[] = $pro_gazou_name;
+	$data[] = $pro_code;
 	$stmt->execute($data);
 
 	$dbh = null;
 
-	print $pro_name;
-	print 'を追加しました。<br />';
+	if($pro_gazou_name !='')
+	{
+		unlink('./gazou/'.$pro-gazou_name);
+	}
 
 }
 catch(Exception $e)
@@ -45,7 +41,9 @@ catch(Exception $e)
 
 ?>
 
-<a href="pro_list.php"> 戻る </a>
+削除しました。<br />
+<br />
+<a href="pro_list.php">　戻る </a>
 
 </body>
 </html>

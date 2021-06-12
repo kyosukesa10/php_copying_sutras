@@ -8,6 +8,7 @@
 <?php
 
 try
+
 {
 
 	$staff_code=$_GET['staffcode'];
@@ -23,7 +24,7 @@ try
 	$datap[]=$staff_code;
 	$stmt->execute($data);
 
-	$rec = $stmt->fetch(PDO::FETCH+ASSOC);
+	$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 	$staff_name=$rec['name'];
 
 	$dbh = null;
@@ -37,7 +38,8 @@ catch (Exception $e)
 
 ?>
 
-スタッフ修正<br /><br />
+スタッフ修正<br />
+<br />
 スタッフコード<br />
 <?php print $staff_code;?>
 <br />

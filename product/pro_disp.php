@@ -11,7 +11,7 @@
 try
 {
 
-	$staff_code=$_GET['staffcode'];
+	$pro_code=$_GET['procode'];
 
 	$dsn = 'mysql:dbname=shop;host=localhost;charset=utf8';
 	$user = 'root';
@@ -19,15 +19,26 @@ try
 	$dbh = new PDO($dsn, $user, $password);
 	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	$sql = 'SELECT name FROM mst_staff WHERE code=?';
+	$sql = 'SELECT name,price,gazou FROM mst_product WHERE code=?';
 	$stmt = $dbh->prepare($sql);
-	$data[]=$staff_code;
+	$data[]=$pro_code;
 	$stmt->execute($data);
 
 	$rec = $stmt->fetch(PDO::FETCH+ASSOC);
-	$staff_name=$rec['name'];
+	$pro_name=$rec['name'];
+	$pro_price=$rec['price'];
+	$pro_gazou_name=$rec['gazou'];
 
 	$dbh = null;
+
+	if($pro_gazou_name=='')
+	{
+		$disp_gazou='';
+	}
+	else
+	{
+		$disp_gazou='<img src="./gazou/'.$pro_gazou_name.'">';
+	}
 
 }
 catch (Exception $e)
@@ -38,13 +49,18 @@ catch (Exception $e)
 
 ?>
 
-スタッフ情報参照<br />
+商品情報参照<br />
 <br />
-スタッフコード<br />
-<?php print $staff_code;?>
+商品コード<br />
+<?php print $pro_code;?>
 <br />
-スタッフ名<br />
-<?php print $staff_name; ?>
+商品名<br />
+<?php print $pro_name; ?>
+<br />
+価格<br />
+<?php print $pro_price; ?> 円
+<br />
+<?php print $disp_gazou; ?>
 <br />
 <br />
 <form>
