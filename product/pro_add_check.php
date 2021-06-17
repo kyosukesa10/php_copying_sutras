@@ -25,12 +25,12 @@ else
 
 <?php
 
-$pro_name=$_POST['name'];
-$pro_pass=$_POST['price'];
-$pro_gazou=$_FILES['gazou'];
+require_once('../common/common.php');
 
-$pro_name=htmlspecialchars($pro_name, ENT_QUOTES, 'UTF-8');
-$pro_price=htmlspecialchars($pro_price, ENT_QUOTES, 'UTF-8');
+$post=sinitize($_POST);
+$pro_name=$post['name'];
+$pro_pass=$post['price'];
+$pro_gazou=$_FILES['gazou'];
 
 if($pro_name=='')
 {

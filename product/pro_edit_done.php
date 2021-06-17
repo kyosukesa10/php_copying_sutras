@@ -25,18 +25,18 @@ else
 
 <?php
 
+require_once('../common/common.php');
+
+$post=sinitize($_POST);
+
 try
 {
 
-	$pro_code = $_POST['code'];
-	$pro_name = $_POST['name'];
-	$pro_price = $_POST['pass'];
-	$pro_gazou_name_old=$_POST['gazou_name_old'];
-	$pro_gazou_name=$_POST['gazou_name'];
-
-	$pro_code = htmlspecialchars($pro_code, ENT_QUOTES, 'UTF-8');
-	$pro_name = htmlspecialchars($pro_name, ENT_QUOTES, 'UTF-8');
-  $pro_pass = htmlspecialchars($pro_pass, ENT_QUOTES, 'UTF-8');
+	$pro_code = $post['code'];
+	$pro_name = $post['name'];
+	$pro_price = $post['pass'];
+	$pro_gazou_name_old=$post['gazou_name_old'];
+	$pro_gazou_name=$post['gazou_name'];
 
 	$dsn = 'mysql:dbname=shop;host=localhost;charset=utf8';
 	$user = 'root';
